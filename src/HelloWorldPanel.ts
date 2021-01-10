@@ -124,9 +124,9 @@ export class HelloWorldPanel {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
-    // const scriptUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.js")
-    // );
+    const scriptUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "media", "main.js")
+    );
 
     // Local path to css styles
     // Uri to load styles into webview
@@ -167,7 +167,8 @@ export class HelloWorldPanel {
             <h1>Hello World</h1>
             <input />
             <button>Hello</button>
-			</body>
+      </body>
+      <script src="${scriptUri}" nonce="${nonce}">
 			
 			</html>`;
   }
