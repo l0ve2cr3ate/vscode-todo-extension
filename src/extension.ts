@@ -21,6 +21,18 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
+    vscode.commands.registerCommand("vstodo.refresh", () => {
+      HelloWorldPanel.kill()
+      HelloWorldPanel.createOrShow(context.extensionUri)
+      // DevTools can only open when webview is open; webview takes some time to load
+      setTimeout(() => {
+        vscode.commands.executeCommand("workbench.action.webview.openDeveloperTools")
+      }, 500)
+      
+    })
+  );
+
+  context.subscriptions.push(
     vscode.commands.registerCommand("vstodo.askQuestion", async () => {
 	 const answer = await vscode.window.showInformationMessage("How was your day?", "good", "bad");
 	 
