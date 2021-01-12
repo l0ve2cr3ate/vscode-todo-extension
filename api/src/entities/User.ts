@@ -1,4 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Todo } from "./Todo";
 
 @Entity()
 export class User extends BaseEntity {
@@ -10,4 +18,11 @@ export class User extends BaseEntity {
 
   @Column("text", { unique: true })
   githubId: string;
+
+  @Column()
+  creatorId: number;
+
+  @OneToMany(() => Todo, (t) => t.creator)
+  @JoinColumn({ name: "creatorId" })
+  todos: Promise<Todo[]>;
 }
